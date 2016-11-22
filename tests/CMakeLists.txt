@@ -38,8 +38,15 @@ add_executable(timeout WIN32 MACOSX_BUNDLE timeout.c ${GLAD})
 add_executable(title WIN32 MACOSX_BUNDLE title.c ${GLAD})
 add_executable(windows WIN32 MACOSX_BUNDLE windows.c ${GETOPT} ${GLAD})
 
-target_link_libraries(empty "${CMAKE_THREAD_LIBS_INIT}" "${RT_LIBRARY}")
-target_link_libraries(threads "${CMAKE_THREAD_LIBS_INIT}" "${RT_LIBRARY}")
+target_link_libraries(empty "${CMAKE_THREAD_LIBS_INIT}")
+if(RT_LIBRARY)
+    target_link_libraries(empty, "${RT_LIBRARY}")
+endif()
+
+target_link_libraries(threads "${CMAKE_THREAD_LIBS_INIT}")
+if(RT_LIBRARY)
+    target_link_libraries(threads, "${RT_LIBRARY}")
+endif()
 
 set(WINDOWS_BINARIES empty gamma icon joysticks sharing tearing threads timeout
                      title windows)

@@ -160,6 +160,9 @@ elseif (WIN32)
 elseif (APPLE)
     set(_GLFW_COCOA 1)
     message(STATUS "Using Cocoa for window creation")
+elseif (ANDROID)
+    set(_GLFW_ANDROID 1)
+    message(STATUS "Using Android NativeActivity for window creation")
 elseif (UNIX)
     set(_GLFW_X11 1)
     message(STATUS "Using X11 for window creation")
@@ -356,6 +359,16 @@ if (_GLFW_COCOA)
 
     set(glfw_PKG_DEPS "")
     set(glfw_PKG_LIBS "-framework Cocoa -framework IOKit -framework CoreFoundation -framework CoreVideo")
+endif()
+
+#--------------------------------------------------------------------
+# Use Android NativeActivity for window creation
+#--------------------------------------------------------------------
+if (_GLFW_ANDROID)
+    find_package(NativeActivity REQUIRED)
+    list(APPEND glfw_INCLUDE_DIRS "$NATIVEACTIVITY_INCLUDE_DIRS")
+    list(APPEND glfw_LIBRARIES "$NATIVEACTIVITY_LIBRARY")
+    list(APPEND glfw_PKG_DEPS "nativeactivity")
 endif()
 
 #--------------------------------------------------------------------
