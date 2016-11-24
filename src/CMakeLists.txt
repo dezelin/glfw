@@ -52,11 +52,9 @@ elseif (_GLFW_OSMESA)
                      osmesa_window.c posix_time.c posix_tls.c
                      osmesa_context.c)
 elseif (_GLFW_ANDROID)
-    set(glfw_HEADERS ${common_HEADERS} ${NATIVEACTIVITY_INCLUDE_DIRS}/android_native_app_glue.h
-                     android_platform.h android_joystick.h 
+    set(glfw_HEADERS ${common_HEADERS} android_platform.h android_joystick.h 
                      posix_time.h posix_tls.h egl_context.h)
-    set(glfw_SOURCES ${common_SOURCES} ${NATIVEACTIVITY_LIBRARIES}/android_native_app_glue.c
-                     android_init.c android_monitor.c android_window.c 
+    set(glfw_SOURCES ${common_SOURCES} android_init.c android_monitor.c android_window.c 
                      android_joystick.c posix_time.c posix_tls.c egl_context.c)
 endif()
 
